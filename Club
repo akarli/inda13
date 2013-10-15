@@ -1,0 +1,114 @@
+import java.util.ArrayList;
+
+/**
+ * Store details of club memberships.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Club{
+    /**
+     * Exercise 4.40
+     * Define a field for an ArrayList.
+     */
+   public ArrayList<Membership> members;
+    
+    /**
+     * Constructor for objects of class Club
+     */
+    public Club(){
+        /**
+        * Exercise 4.40
+        * Assign the ArrayList.
+        */
+        members = new ArrayList<Membership>();       
+    }
+
+    /**
+     * Exercise 4.42
+     * Add a new member to the club's list of members.
+     * @param member The member object to be added.
+     */
+    public void join(Membership member){
+        members.add(member);
+    }
+
+    /**
+     * Exercise 4.41
+     * @return The number of members (Membership objects) in
+     *         the club.
+     */
+    public int numberOfMembers(){
+        return members.size();
+    }
+    
+    /**
+     * Exercise 4.54
+     * Determine the number of members who joined in the given month.
+     * @param month The month we are interested in.
+     * @return The number of members who joined in that month.
+     */
+    public int joinedInMonth(int month){  
+        int monthAmount = 0;
+                   
+        if(month < 1 || month > 12){
+        
+            System.out.println("The month must be between 1 and 12.");
+            
+            return 0;    
+        }
+        
+        for(int i = 0;i < members.size();i++){
+            if(members.get(i).getMonth() == month){
+                
+                    monthAmount=monthAmount+1;
+                    
+                }
+        }
+
+        if(monthAmount == 0){
+        
+            System.out.println("No one joined in the specified month.");
+            return 0;
+        }
+        
+        return monthAmount;
+    }
+    
+    /**
+     * Exercise 4.55
+     * Remove from the club's collection all members who joined in the given month,
+     * and return them stored in a separate collection object.
+     * @param month The month of the membership.
+     * @param year The year of the membership.
+     * @return The members who joined in the given month and year.
+     */
+    public ArrayList<Membership> purge(int month, int year){
+        ArrayList<Membership> removeMembers = new ArrayList<Membership>();
+        
+        if(month < 1 || month > 12){
+        
+            System.out.println("The month must be between 1 and 12.");
+            return removeMembers;
+        }
+        
+        for(int i = 0;i < members.size();i++){
+            if(members.get(i).getMonth() == month && members.get(i).getYear() == year){
+            
+                removeMembers.add(members.get(i));
+                members.remove(i);
+                i--; //måste minska i då vi minskar members
+            }
+            
+        }
+        
+        if(removeMembers.size() == 0){
+        
+            System.out.println("No members joined on the specified month and year.");
+            
+            return removeMembers;
+        }
+        
+        return removeMembers;
+    }
+}
